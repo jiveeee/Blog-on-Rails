@@ -1,0 +1,40 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+.navbar {
+    background-color: #181818 !important;
+    }
+
+.nav-link {
+    color: white !important;
+}
+
+.jumbotron{
+    border-radius: 12px;
+    padding: 50px;
+}
+
+#logo {
+    float: left;
+    font-size: 1.7em;
+    color: white;
+    letter-spacing: -1px;
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+#home-container {
+    margin-top: 25px;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#page-content {
+    flex: 1 0 auto;
+
+}
+#sticky-footer{
+    flex-shrink: none;
+}
