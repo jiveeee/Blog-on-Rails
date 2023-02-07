@@ -7,6 +7,10 @@ class UsersController < ApplicationController
         @articles = @user.articles
     end
 
+    def index
+        @users = User.all
+    end
+
     def new
         @user = User.new
     end
@@ -17,7 +21,7 @@ class UsersController < ApplicationController
     def update
         if @user.update(user_params)
             flash[:notice] = "Your profile is successfully updated"
-            redirect_to articles_path
+            redirect_to user_path
         else
             render 'edit'
         end
