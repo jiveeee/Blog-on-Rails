@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
     #we already have created & migrated users table, added & migrated password_digest column to it.
 
-    before_action :find_user, only:[:edit, :update]
+    before_action :find_user, only:[:edit, :update, :show]
+
+    def show
+        @articles = @user.articles
+    end
 
     def new
         @user = User.new
