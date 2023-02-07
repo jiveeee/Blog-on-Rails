@@ -1,3 +1,17 @@
-<h1 class="text-center mt-4"><%= @user.username%>'s Profile</h1>
+<div id="page-content">
+  <div class="container" id="home-container">
+    <div class="row justify-content-md-center">
+      <div class="col-10 jumbotron border border-dark text-center">
+      <h1 class="text-center mt-4"><%= @user.username%>'s Profile</h1>
+      <p class="lead"> Hello <%= @user.username %>! This is your realm. Enjoy! </p>
+        <hr class="my-4">
+        <p>Here you can edit your profile.</p> <br>
+        <p class="lead">
+        <%= link_to 'Edit profile', edit_user_path(@user.id), class:"btn btn-outline-warning" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= render 'articles/article' %>
