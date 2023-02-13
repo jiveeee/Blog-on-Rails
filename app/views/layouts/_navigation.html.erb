@@ -26,8 +26,11 @@
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
       </form>
+      <div>
+      <%= link_to "Log in", login_path, class:"btn btn-success me-2" %>
+      <%= link_to "Logout", logout_path, class:"btn btn-danger", method: :delete %>
+      </div>
     </div>
   </div>
 </nav>
