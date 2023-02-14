@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
     #we already have created & migrated users table, added & migrated password_digest column to it.
 
-    before_action :find_user, only:[:edit, :update, :show, :destroy]
+    before_action :find_user, only:[:edit, :update, :show]
     before_action :require_user, except:[:show, :index]
     before_action :require_same_user, only:[:edit, :update]
+
+    def require_same_user
+        if current_user != @user
+            flash[:alert] = "You can only modify your own profile"
+            redirect_to user_path
+        end
+    end
 
     def show
         @articles = @user.articles.paginate(page: params[:page], per_page: 2)
@@ -40,13 +47,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def destroy
-        @user.destroy
-        session[:user_id] = nil
-        flash[:notice] = "Account and all associated articles are deleted"
-        redirect_to articles_path
-    end
-
     private
 
     def find_user
@@ -55,13 +55,6 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:username, :email, :password)
-    end
-
-    def require_same_user
-        if current_user != @user
-            flash[:alert] = "You can only modify your own profile"
-            redirect_to user_path
-        end
     end
 
 end
