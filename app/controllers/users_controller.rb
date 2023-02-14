@@ -2,13 +2,22 @@ class UsersController < ApplicationController
     #we already have created & migrated users table, added & migrated password_digest column to it.
 
     before_action :find_user, only:[:edit, :update, :show]
+    before_action :require_user, except:[:show, :index]
+    before_action :require_same_user, only:[:edit, :update]
+
+    def require_same_user
+        if current_user != @user
+            flash[:alert] = "You can only modify your own profile"
+            redirect_to user_path
+        end
+    end
 
     def show
         @articles = @user.articles.paginate(page: params[:page], per_page: 2)
     end
 
     def index
-        @users = User.paginate(page: params[:page], per_page: 2)
+        @users = User.paginate(page: params[:page], per_page: 3)
     end
 
     def new
@@ -30,6 +39,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            session[:user_id] = @user.id
             flash[:notice] = "Welcome to the Blog on Rails #{@user.username}!"
             redirect_to articles_path
         else
