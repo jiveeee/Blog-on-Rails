@@ -5,7 +5,7 @@
       <h1 class="text-center mt-4"><%= @user.username%>'s Profile</h1>
       <p class="lead"> Hello <%= @user.username %>! This is your realm. Enjoy! </p>
         <hr class="my-4">
-        <% if logged_in? && @user == current_user %>
+        <% if logged_in? && (@user == current_user || current_user.admin?) %>
           <p>Here you can edit your profile.</p> <br>
           <p class="lead">
           <%= link_to 'Edit profile', edit_user_path(@user.id), class:"btn btn-outline-warning" %>
