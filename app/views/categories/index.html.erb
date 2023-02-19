@@ -1,0 +1,32 @@
+<h1 class="text-center mt-4">All Article Categories</h1>
+
+<div class="apple_pagination mt-5">
+    <%= will_paginate @categories, :container => false %>
+</div>
+
+<div class="container">
+    <div class="row justify-content-md-cente my-5">
+        <%= link_to 'Create new Category', new_category_path, class: "btn btn-outline-dark" %>
+    </div>
+    <% @categories.each do |category| %>
+        <div class="row justify-content-md-center">
+            <div class="col-10 mt-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= link_to category.name, category_path(category), class:"text-dark" %></h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>
+                            Created <%= time_ago_in_words(category.created_at) %> ago, 
+                            Edited <%= time_ago_in_words(category.updated_at) %> ago
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<div class="apple_pagination mt-5 mb-5">
+    <%= will_paginate @categories, :container => false %>
+</div>
